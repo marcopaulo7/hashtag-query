@@ -10,9 +10,9 @@ const endpointUrl = "https://api.twitter.com/2/tweets/search/recent";
 
 export const getByHashtag = async (hashtag: String) => {
     const params = {
-        'query': `#${hashtag}`,
+        'query': `#${hashtag}  -is:retweet`,
         'expansions': 'author_id',
-        'user.fields': 'username'
+        'user.fields': 'profile_image_url'
     }
 
     const res = await needle('get', endpointUrl, params, {

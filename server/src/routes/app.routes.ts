@@ -8,7 +8,7 @@ router.get("/search", async (req: Request, res: Response) => {
 
     try {
         const tweets = await Controller.searchByHashtag(hashtag);
-
+        res.header("Access-Control-Allow-Origin", "*");
         if (tweets) 
             return res.status(200).send(tweets);
         res.status(404).send("Nenhum tweet encontrado.");
@@ -17,12 +17,15 @@ router.get("/search", async (req: Request, res: Response) => {
     }
 });
 
-router.patch("/authorize", async (req: Request, res: Response) => {
+router.patch("/authorize/:id", async (req: Request, res: Response) => {
     try {
-        const success: Boolean = Controller.authorizeTweet(<string> req.query.id);
+        const tweets = Controller.authorizeTweet(<string> req.params.id);
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
+        res.header("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token");
 
-        if (success) 
-            return res.sendStatus(204);
+        if (tweets) 
+            return res.status(200).send(tweets);
         else
             return res.status(404).send("Tweet não encontrado.");
     } catch (e) {
@@ -30,12 +33,15 @@ router.patch("/authorize", async (req: Request, res: Response) => {
     }
 });
 
-router.delete("/discard", async (req: Request, res: Response) => {
+router.delete("/discard:id", async (req: Request, res: Response) => {
     try {
-        const success: Boolean = Controller.discardTweet(<string> req.query.id);
+        const tweets = Controller.discardTweet(<string> req.params.id);
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
+        res.header("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token");
 
-        if (success) 
-            return res.sendStatus(204);
+        if (tweets) 
+            return res.status(200).send(tweets);
         else
             return res.status(404).send("Tweet não encontrado.");
     } catch (e) {

@@ -28,9 +28,9 @@ const token = process.env.BEARER_TOKEN;
 const endpointUrl = "https://api.twitter.com/2/tweets/search/recent";
 exports.getByHashtag = (hashtag) => __awaiter(void 0, void 0, void 0, function* () {
     const params = {
-        'query': `#${hashtag}`,
+        'query': `#${hashtag}  -is:retweet`,
         'expansions': 'author_id',
-        'user.fields': 'username'
+        'user.fields': 'profile_image_url'
     };
     const res = yield needle_1.default('get', endpointUrl, params, {
         headers: {

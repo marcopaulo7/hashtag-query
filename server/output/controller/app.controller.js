@@ -17,15 +17,18 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const twitterService = __importStar(require("../service/twitter.service"));
-const cache = {};
+let cache = {};
 exports.searchByHashtag = (hashtag) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        cache = {};
         let result = yield twitterService.getByHashtag(hashtag);
         let formattedData = result.data.map((t) => ({ id: t.id, userId: t.author_id, text: t.text }));
         let userDict = result.includes.users.reduce((a, u) => (Object.assign(Object.assign({}, a), { [u.id]: u })), {}); //Transforma o array de usuários em um dicionário para melhorar 
         //a performance ao preencher o nome de usuário do objeto Tweet
         formattedData.forEach(tweet => {
             tweet.userName = userDict[tweet.userId].username;
+            tweet.name = userDict[tweet.userId].name;
+            tweet.imgUrl = userDict[tweet.userId].profile_image_url;
             cache[tweet.id] = tweet;
         });
         return cache;
@@ -39,14 +42,13 @@ exports.authorizeTweet = (id) => {
     if (tweet == undefined)
         return false;
     console.log(`Tweet enviado para a tela! @${tweet.userName}|${tweet.text}`);
-    //send to database
     cache[id] = undefined;
-    return true;
+    return cache;
 };
 exports.discardTweet = (id) => {
     let tweet = cache[id];
     if (tweet == undefined)
         return false;
     cache[id] = undefined;
-    return true;
+    return cache;
 };

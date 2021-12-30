@@ -13,7 +13,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const app_routes_1 = require("./routes/app.routes");
 const dotenv = __importStar(require("dotenv"));
+const cors_1 = __importDefault(require("cors"));
 dotenv.config();
 const app = express_1.default();
+const corsOptions = {
+    origin: '*',
+    credentials: false,
+    optionSuccessStatus: 200
+};
+app.use(cors_1.default(corsOptions));
 app.use('/', app_routes_1.router);
 app.listen(process.env.PORT, () => console.log(`Servidor iniciado na porta ${process.env.PORT}!`));

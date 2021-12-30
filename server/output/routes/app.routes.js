@@ -26,6 +26,7 @@ exports.router.get("/search", (req, res) => __awaiter(void 0, void 0, void 0, fu
     const hashtag = req.query.hashtag;
     try {
         const tweets = yield Controller.searchByHashtag(hashtag);
+        res.header("Access-Control-Allow-Origin", "*");
         if (tweets)
             return res.status(200).send(tweets);
         res.status(404).send("Nenhum tweet encontrado.");
@@ -34,11 +35,14 @@ exports.router.get("/search", (req, res) => __awaiter(void 0, void 0, void 0, fu
         res.status(500).send(e);
     }
 }));
-exports.router.patch("/authorize", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.router.patch("/authorize/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const success = Controller.authorizeTweet(req.query.id);
-        if (success)
-            return res.sendStatus(204);
+        const tweets = Controller.authorizeTweet(req.params.id);
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
+        res.header("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token");
+        if (tweets)
+            return res.status(200).send(tweets);
         else
             return res.status(404).send("Tweet não encontrado.");
     }
@@ -46,11 +50,14 @@ exports.router.patch("/authorize", (req, res) => __awaiter(void 0, void 0, void 
         res.status(500).send(e);
     }
 }));
-exports.router.delete("/discard", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.router.delete("/discard:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const success = Controller.discardTweet(req.query.id);
-        if (success)
-            return res.sendStatus(204);
+        const tweets = Controller.discardTweet(req.params.id);
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
+        res.header("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token");
+        if (tweets)
+            return res.status(200).send(tweets);
         else
             return res.status(404).send("Tweet não encontrado.");
     }
