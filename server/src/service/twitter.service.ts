@@ -1,4 +1,3 @@
-// Search for Tweets within the past seven days
 // https://developer.twitter.com/en/docs/twitter-api/tweets/search/quick-start/recent-search
 
 import needle from 'needle';

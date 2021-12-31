@@ -4,12 +4,10 @@ import * as Controller from "../controller/app.controller";
 export const router = express.Router();
 
 router.get("/search", async (req: Request, res: Response) => {
-    const hashtag: string = <string> req.query.hashtag;
-
     try {
+        const hashtag: string = req.query.hashtag as string;
         const tweets = await Controller.searchByHashtag(hashtag);
-        res.header("Access-Control-Allow-Origin", "*");
-        if (tweets) 
+        if (tweets)
             return res.status(200).send(tweets);
         res.status(404).send("Nenhum tweet encontrado.");
     } catch (e) {
@@ -19,12 +17,8 @@ router.get("/search", async (req: Request, res: Response) => {
 
 router.patch("/authorize/:id", async (req: Request, res: Response) => {
     try {
-        const tweets = Controller.authorizeTweet(<string> req.params.id);
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
-        res.header("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token");
-
-        if (tweets) 
+        const tweets = Controller.authorizeTweet(req.params.id);
+        if (tweets)
             return res.status(200).send(tweets);
         else
             return res.status(404).send("Tweet não encontrado.");
@@ -35,12 +29,8 @@ router.patch("/authorize/:id", async (req: Request, res: Response) => {
 
 router.delete("/discard:id", async (req: Request, res: Response) => {
     try {
-        const tweets = Controller.discardTweet(<string> req.params.id);
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
-        res.header("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token");
-
-        if (tweets) 
+        const tweets = Controller.discardTweet(req.params.id);
+        if (tweets)
             return res.status(200).send(tweets);
         else
             return res.status(404).send("Tweet não encontrado.");

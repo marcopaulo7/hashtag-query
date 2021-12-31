@@ -2,6 +2,7 @@
   text-align: center;
 }
 
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -58,10 +59,11 @@
 }
 
 .alert {
-  margin-top: 5rem;
   align-items: center;
   justify-content: center;
+  margin-top: 5rem;
   max-width: 70%;
+  position: static;
 }
 
 .alert-item {

@@ -19,7 +19,7 @@ export const TweetComponent = (props: TweetComponentProps) => {
                     <Text fontWeight='bold'>
                         {props.tweet.name}
                     </Text>
-                    <Text fontSize='sm'>{props.tweet.userName}</Text>
+                    <Text fontSize='sm'>@{props.tweet.userName}</Text>
                 </Box>
                 <Stack spacing={1} ml="auto" mr="0" direction='row' float='right'>
                     {props.isDiscarding ? <IconButton isLoading aria-label='Descartar tweet' colorScheme='red' size='md' position="static" isLoad icon={<DeleteIcon />} onClick={handleDiscardClick} /> :

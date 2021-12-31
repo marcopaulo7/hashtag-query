@@ -4,10 +4,7 @@ import * as dotenv from "dotenv";
 import cors from 'cors';
 
 dotenv.config();
-
-
 const app = express();
-
 
 const corsOptions ={
     origin:'*', 
@@ -15,6 +12,5 @@ const corsOptions ={
     optionSuccessStatus:200
 }
 app.use(cors(corsOptions));
-
 app.use('/', router);
 app.listen(process.env.PORT, () => console.log(`Servidor iniciado na porta ${process.env.PORT}!`));
