@@ -1,46 +1,22 @@
-# Getting Started with Create React App
+# hashtag-query
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Instalação
 
-## Available Scripts
+Para a solução ser utilizada, é necessário iniciar o server, localizado no diretório ./server. Com o terminal/cmd neste diretório, basta executar os comandos abaixo:
 
-In the project directory, you can run:
+`npm install`
+`npm start`
 
-### `npm start`
+Após o start o servidor estara executando e pronto para receber requisições. 
+Com isso, em outro terminal/cmd, basta executar novamente os mesmos comandos acima no diretório raiz para realizar a instalação do front-end.
+Após o start na raiz do diretório a aplicação estará pronta para ser utilizada através da URL informada no terminal/cmd.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Ferramentas utilizadas:
+- express - Simplifica a implementação da API REST.
+- needle - Utilizado para realizar requests HTTP para a API do Twitter no back-end.
+- chakra-ui - Bibliotecas de components React.
+- axios - Utilizado para realizar requests HTTP do front para o back-end.
+- dotenv - Interpreta o arquivo de variaveis de ambiente (.env).
+- cors - Utilizado para habilitar requisições em que o local de origem seja diferente do local do server.
+- twitter-text - Biblioteca de código aberto criada pelo Twitter com funções de validação 
+- react-masonry-css - Biblioteca que provem o moisaco de tweets utilizado na aplicação.
