@@ -17,9 +17,9 @@ router.get('/search', async (req: Request, res: Response) => {
 
 router.patch('/authorize/:id', async (req: Request, res: Response) => {
     try {
-        const tweets = Controller.authorizeTweet(req.params.id);
-        if (tweets)
-            return res.status(204);
+        const id = Controller.authorizeTweet(req.params.id);
+        if (id)
+            return res.status(200).send({id: id});
         else
             return res.status(404).send('Tweet não encontrado.');
     } catch (e) {
@@ -29,9 +29,9 @@ router.patch('/authorize/:id', async (req: Request, res: Response) => {
 
 router.delete('/discard:id', async (req: Request, res: Response) => {
     try {
-        const tweets = Controller.discardTweet(req.params.id);
-        if (tweets)
-            return res.status(204);
+        const id = Controller.discardTweet(req.params.id);
+        if (id)
+            return res.status(200).send({id: id});
         else
             return res.status(404).send('Tweet não encontrado.');
     } catch (e) {

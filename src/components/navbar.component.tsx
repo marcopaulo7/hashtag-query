@@ -18,7 +18,7 @@ export const Navbar = (props: NavbarProps) => {
 
     return (
         <Center className='navbar-box' boxShadow='base'>
-            <InputGroup className='search-input-box' w='70%'>
+            <InputGroup className='search-input-box'>
                 <InputLeftElement className='search-bar-symbol' children={props.fixedSymbol} />
                 {props.isInvalid ?
                     <Input placeholder={props.placeholder} onChange={handleChange} onKeyPress={handleKeyPress} isInvalid errorBorderColor='crimson' /> :

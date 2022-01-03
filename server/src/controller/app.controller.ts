@@ -35,12 +35,12 @@ export const authorizeTweet = (id: string) => {
     if (tweet === undefined) return false;
     console.log(`Tweet enviado para a tela! @${tweet.userName}|${tweet.text}`)
     cache[id] = undefined;
-    return cache;
+    return id;
 };
 
 export const discardTweet = (id: string) => {
     let tweet = cache[id];
     if (tweet === undefined) return false;
     cache[id] = undefined;
-    return cache;
+    return id;
 };

@@ -1,5 +1,5 @@
 export interface MainProps {
- }
+}
 
 export interface NavbarProps {
     placeholder: string
@@ -43,5 +43,5 @@ export interface SearchResponse {
 }
 
 export interface PatchResponse {
-    data: string
+    data: { id: string }
 }

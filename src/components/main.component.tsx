@@ -56,7 +56,7 @@ export const Main = () => {
         axios.patch(`${process.env.REACT_APP_API_URL}/authorize/${id}`)
             .then((response: PatchResponse) => {
                 console.log(response);
-                const { [id]: _, ...newTweets } = tweets;
+                const { [response.data.id]: _, ...newTweets } = tweets;
                 setTweets(newTweets);
             })
             .catch(function (e: AxiosError) {
@@ -73,7 +73,7 @@ export const Main = () => {
         axios.delete(`${process.env.REACT_APP_API_URL}/discard${id}`)
             .then((response: PatchResponse) => {
                 console.log(response);
-                const { [id]: _, ...newTweets } = tweets
+                const { [response.data.id]: _, ...newTweets } = tweets
                 setTweets(newTweets);
             })
             .catch(function (e: AxiosError) {
@@ -118,5 +118,4 @@ export const Main = () => {
             </Masonry>
         </>
     );
-
 }

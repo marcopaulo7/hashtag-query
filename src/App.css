@@ -33,7 +33,6 @@
   display: -webkit-box;
   display: flex;
   margin-top: 5rem;
-  width: 70%;
 }
 
 .my-masonry-grid-no-margin-top {
@@ -76,6 +75,7 @@
 .search-input-box {
   background-color: #FFFFFF;
   border-radius: 0.5rem;
+  width: 70% !important;
 }
 
 .search-bar-symbol {
@@ -127,4 +127,16 @@
 
 .tweet-text {
   font-size: medium;
+}
+
+@media screen and (min-width: 640px) {
+  .my-masonry-grid {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .search-input-box {
+    width: 95% !important;
+  }
 }

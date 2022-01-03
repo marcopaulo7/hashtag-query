@@ -24,7 +24,7 @@ export const TweetComponent = (props: TweetComponentProps) => {
                 </Box>
                 <Stack className='tweet-action-box' spacing={1} direction='row'>
                     {props.isDiscarding ? 
-                    <IconButton isLoading aria-label='Descartar tweet' colorScheme='red' size='md' position='static' isLoad icon={<DeleteIcon />} onClick={handleDiscardClick} /> :
+                    <IconButton isLoading aria-label='Descartar tweet' colorScheme='red' size='md' position='static' icon={<DeleteIcon />} onClick={handleDiscardClick} /> :
                         <IconButton aria-label='Descartar tweet' colorScheme='red' size='md' position='static' icon={<DeleteIcon />} onClick={handleDiscardClick} />}
                     {props.isAuthorizing ? 
                     <IconButton isLoading aria-label='Aprovar tweet' colorScheme='green' size='md' position='static' icon={<CheckIcon />} onClick={handleAuthorizeClick} /> :
