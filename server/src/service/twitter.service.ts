@@ -1,11 +1,11 @@
 // https://developer.twitter.com/en/docs/twitter-api/tweets/search/quick-start/recent-search
 
 import needle from 'needle';
-import * as dotenv from "dotenv";
+import * as dotenv from 'dotenv';
 dotenv.config();
 
 const token = process.env.BEARER_TOKEN;
-const endpointUrl = "https://api.twitter.com/2/tweets/search/recent";
+const endpointUrl = 'https://api.twitter.com/2/tweets/search/recent';
 
 export const getByHashtag = async (hashtag: String) => {
     const params = {
@@ -16,8 +16,8 @@ export const getByHashtag = async (hashtag: String) => {
 
     const res = await needle('get', endpointUrl, params, {
         headers: {
-            "User-Agent": "v2RecentSearchJS",
-            "authorization": `Bearer ${token}`
+            'User-Agent': 'v2RecentSearchJS',
+            'authorization': `Bearer ${token}`
         }
     })
 

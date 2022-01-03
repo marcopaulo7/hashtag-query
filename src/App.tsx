@@ -1,11 +1,12 @@
 import './App.css';
-import {Main} from './components/main.component'
+import { Main } from './components/main.component'
 import { ChakraProvider, Container } from '@chakra-ui/react'
+import { customTheme } from './configs/themes';
 
 function App() {
   return (
-    <ChakraProvider>
-      <Container m="auto" maxW='100%' minW='100%' centerContent>
+    <ChakraProvider theme={customTheme}>
+      <Container className='app-container' centerContent>
         <Main></Main>
       </Container>
     </ChakraProvider>

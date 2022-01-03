@@ -1,6 +1,6 @@
-import { Tweet } from "../model/app.model";
-import { TwitterData, TwitterUser } from "../model/twitter.model";
-import * as twitterService from "../service/twitter.service"
+import { Tweet } from '../model/app.model';
+import { TwitterData, TwitterUser } from '../model/twitter.model';
+import * as twitterService from '../service/twitter.service'
 
 let cache: { [id: string]: Tweet | undefined } = {}
 
@@ -10,7 +10,7 @@ export const searchByHashtag = async (hashtag: String) => {
         let result = await twitterService.getByHashtag(hashtag);
 
         let formattedData: Tweet[] = result.data.map((t: TwitterData) =>  { 
-            let newT: Tweet = { id: t.id, userId: t.author_id, text: t.text, name: "", userName: "", imgUrl: "" }
+            let newT: Tweet = { id: t.id, userId: t.author_id, text: t.text, name: '', userName: '', imgUrl: '' }
             return newT;
         });
         let userDict = result.includes.users.reduce((a: TwitterUser, u: TwitterUser) => ({ ...a, [u.id]: u }), {}); //Transforma o array de usuários em um dicionário para melhorar 

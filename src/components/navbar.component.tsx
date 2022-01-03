@@ -15,25 +15,25 @@ export const Navbar = (props: NavbarProps) => {
         if (e.key === 'Enter')
             props.onSearchClick(hashtag)
     }
-    
+
     return (
-        <Center position="fixed" w="100%" h="7%" backgroundColor="WhiteSmoke">
-            <InputGroup w="70%">
-                <InputLeftElement pointerEvents='none' color='gray' fontSize='1.2em' children={props.fixedSymbol} />
+        <Center className='navbar-box' boxShadow='base'>
+            <InputGroup className='search-input-box' w='70%'>
+                <InputLeftElement className='search-bar-symbol' children={props.fixedSymbol} />
                 {props.isInvalid ?
                     <Input placeholder={props.placeholder} onChange={handleChange} onKeyPress={handleKeyPress} isInvalid errorBorderColor='crimson' /> :
                     <Input placeholder={props.placeholder} onChange={handleChange} onKeyPress={handleKeyPress} />
                 }
                 <InputRightElement width='6rem'>
                     {props.isSearching ?
-                        <Button isLoading leftIcon={props.buttonIcon} h='2rem' size='sm' colorScheme='teal' variant='solid' onClick={handleClick}>
+                        <Button className='search-bar-button' isLoading leftIcon={props.buttonIcon} size='sm' colorScheme='teal' variant='solid' onClick={handleClick}>
                             {props.buttonText}
                         </Button> :
                         props.isInvalid ?
-                            <Button leftIcon={props.buttonIcon} h='2rem' size='sm' colorScheme='red' variant='solid' onClick={handleClick}>
+                            <Button className='search-bar-button' leftIcon={props.buttonIcon} size='sm' colorScheme='red' variant='solid' onClick={handleClick}>
                                 {props.buttonText}
                             </Button> :
-                            <Button leftIcon={props.buttonIcon} h='2rem' size='sm' colorScheme='teal' variant='solid' onClick={handleClick}>
+                            <Button className='search-bar-button' leftIcon={props.buttonIcon} size='sm' colorScheme='teal' variant='solid' onClick={handleClick}>
                                 {props.buttonText}
                             </Button>
                     }

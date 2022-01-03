@@ -38,6 +38,10 @@ export interface Tweet {
     imgUrl: string
 }
 
-export interface RequestResponse {
+export interface SearchResponse {
     data: { [x: string]: Tweet; }
+}
+
+export interface PatchResponse {
+    data: string
 }

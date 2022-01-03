@@ -5,12 +5,13 @@ import { TweetComponent } from './tweet.component'
 import { Tweet } from '../../server/src/model/app.model'
 import { SearchIcon } from '@chakra-ui/icons'
 import Masonry from 'react-masonry-css'
-import { RequestResponse } from '../model/app.model';
+import { PatchResponse, SearchResponse } from '../model/app.model';
 import twitter from 'twitter-text';
 import { Alert, AlertIcon, Stack, useMediaQuery } from '@chakra-ui/react';
+import { AxiosError } from 'axios';
 
 const axios = require('axios').default;
-let errorTimeoutId: NodeJS.Timeout
+let errorTimeoutId: NodeJS.Timeout;
 
 export const Main = () => {
     const [tweets, setTweets] = useState<{ [x: string]: Tweet }>({});
@@ -22,93 +23,92 @@ export const Main = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleSearchClick = useCallback(async (hashtag: string) => {
-        if (isSearching) return
+        if (isSearching) return;
 
         if (!twitter.isValidHashtag(`#${hashtag}`)) {
-            setInvalidSearch(true)
-            return
+            setInvalidSearch(true);
+            return;
         }
 
-        setIsSearching(true)
-        setInvalidSearch(false)
+        setIsSearching(true);
+        setInvalidSearch(false);
         for (let id in tweets) {
             setTweets((tweets: { [x: string]: Tweet }) => {
-                delete tweets[id]
-                return tweets
+                delete tweets[id];
+                return tweets;
             })
         }
         axios.get(`${process.env.REACT_APP_API_URL}/search?hashtag=${hashtag}`)
-            .then((response: RequestResponse) => {
-                setTweets(response.data)
-                console.log(response);
+            .then((response: SearchResponse) => {
+                setTweets(response.data);
             })
-            .catch(function (e: any) {
-                console.log(e);
-                let errorMessage = 'Erro ao buscar tweets.'
-                showErrorAlert(errorMessage)
+            .catch(function (e: AxiosError) {
+                let errorMessage = `Erro ao buscar tweets: ${e.response?.data ?? e.response?.statusText}`;
+                showErrorAlert(errorMessage);
             })
             .then(function () {
-                setIsSearching(false)
+                setIsSearching(false);
             });
-    }, [tweets, isSearching])
+    }, [tweets, isSearching]);
 
     const handleAuthorizeClick = useCallback(async (id: string) => {
-        setAuthorizingIds([...authorizingIds, id])
+        setAuthorizingIds([...authorizingIds, id]);
         axios.patch(`${process.env.REACT_APP_API_URL}/authorize/${id}`)
-            .then((response: RequestResponse) => {
-                setTweets(response.data)
+            .then((response: PatchResponse) => {
                 console.log(response);
+                const { [id]: _, ...newTweets } = tweets;
+                setTweets(newTweets);
             })
-            .catch(function (e: any) {
-                console.log(e);
-                let errorMessage = 'Erro ao autorizar o tweet selecionado.'
-                showErrorAlert(errorMessage)
+            .catch(function (e: AxiosError) {
+                let errorMessage = `Erro ao autorizar o tweet selecionado: ${e.response?.data ?? e.response?.statusText}`;
+                showErrorAlert(errorMessage);
             })
             .then(function () {
-                setAuthorizingIds(authorizingIds.filter(savedId => savedId !== id))
+                setAuthorizingIds(authorizingIds.filter(savedId => savedId !== id));
             });
-    }, [authorizingIds])
+    }, [tweets, authorizingIds]);
 
     const handleDiscardClick = useCallback(async (id: string) => {
-        setDiscardingIds([...discardingIds, id])
+        setDiscardingIds([...discardingIds, id]);
         axios.delete(`${process.env.REACT_APP_API_URL}/discard${id}`)
-            .then((response: RequestResponse) => {
+            .then((response: PatchResponse) => {
                 console.log(response);
-                setTweets(response.data)
+                const { [id]: _, ...newTweets } = tweets
+                setTweets(newTweets);
             })
-            .catch(function (e: any) {
+            .catch(function (e: AxiosError) {
                 console.log(e);
-                let errorMessage = 'Erro ao descartar o tweet selecionado.'
-                showErrorAlert(errorMessage)
+                let errorMessage = `Erro ao descartar o tweet selecionado: ${e.response?.data ?? e.response?.statusText}`;
+                showErrorAlert(errorMessage);
             })
             .then(function () {
-                setDiscardingIds(discardingIds.filter(savedId => savedId !== id))
+                setDiscardingIds(discardingIds.filter(savedId => savedId !== id));
             })
-    }, [discardingIds])
+    }, [tweets, discardingIds]);
 
     const showErrorAlert = (errorMessage: string) => {
-        clearTimeout(errorTimeoutId)
-        setError(true)
-        setErrorMessage(errorMessage)
+        clearTimeout(errorTimeoutId);
+        setError(true);
+        setErrorMessage(errorMessage);
         errorTimeoutId = setTimeout(() => {
-            setError(false)
-            setErrorMessage('')
-        }, 5000)
-    }
+            setError(false);
+            setErrorMessage('');
+        }, 5000);
+    };
 
-    const [isSmallScreen] = useMediaQuery('(max-width: 1050px)')
+    const [isSmallScreen] = useMediaQuery('(max-width: 1050px)');
 
     return (
         <>
             <Navbar placeholder='Entre com a hashtag desejada' fixedSymbol='#' buttonText='Buscar' buttonIcon={<SearchIcon />} onSearchClick={handleSearchClick} isSearching={isSearching} isInvalid={invalidSearch}></Navbar>
             {error &&
-                <Stack className='alert' spacing={1} w="100%">
-                    <Alert status='error'>
+                <Stack className='alert' spacing={1}>
+                    <Alert className='alert-item' status='error'>
                         <AlertIcon />
                         {errorMessage}
                     </Alert>)
                 </Stack>}
-            <Masonry breakpointCols={isSmallScreen ? 1 : 2} className={error ? "my-masonry-grid-no-margin-top" : "my-masonry-grid"} columnClassName="my-masonry-grid_column">
+            <Masonry breakpointCols={isSmallScreen ? 1 : 2} className={error ? 'my-masonry-grid-no-margin-top' : 'my-masonry-grid'} columnClassName='my-masonry-grid_column'>
                 {Object.values(tweets).map((t: any) => {
                     let isAuthorizing = authorizingIds.includes(t.id)
                     let isDiscarding = discardingIds.includes(t.id)

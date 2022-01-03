@@ -11,6 +11,8 @@ Após o start o servidor estara executando e pronto para receber requisições.
 Com isso, em outro terminal/cmd, basta executar novamente os mesmos comandos acima no diretório raiz para realizar a instalação do front-end.
 Após o start na raiz do diretório a aplicação estará pronta para ser utilizada através da URL informada no terminal/cmd.
 
+O comando `npm start` já builda automaticamente os projetos, mas caso deseje executar apenas o fluxo de build, basta utilizar o comando `npm run build` no diretório do projeto (client ou server) desejado.
+
 ## Ferramentas utilizadas:
 - express - Simplifica a implementação da API REST.
 - needle - Utilizado para realizar requests HTTP para a API do Twitter no back-end.
