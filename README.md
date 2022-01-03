@@ -20,7 +20,7 @@ E para executar o servidor, é necessário executar os seguintes comandos no dir
 `npm run build`
 `npm start`
 
-Após executar os dois projetos, a aplicação estará pronta para ser utilizada através da URL [Link da aplicação (local)](http://localhost:3000/).
+Após executar os dois projetos, a aplicação estará pronta para ser utilizada através da URL [http://localhost:3000/](http://localhost:3000/).
 
 
 ## Ferramentas utilizadas:
