@@ -1,5 +1,4 @@
-# hashtag-query ![node version](https://img.shields.io/static/v1?label=node&message=v16.13.1&color=blue)
-
+# hashtag-query ![react version](https://img.shields.io/badge/react-v17.0.2-blue) ![node version](https://img.shields.io/static/v1?label=node&message=v16.13.1&color=blue) ![TypeScript](https://img.shields.io/npm/types/typescript)
 
 ## Instalação
 A solução pode ser instalada de duas maneiras. Em sistemas UNIX (Linux/MacOS), basta utilizar os arquivos makefile contidos nos diretorios raiz, para o cliente, e no diretório ./server, para o servidor, utilizando os comandos abaixo no terminal:
@@ -29,5 +28,5 @@ Após executar os dois projetos, a aplicação estará pronta para ser utilizada
 - axios - Utilizado para realizar requests HTTP do front para o back-end.
 - dotenv - Interpreta o arquivo de variaveis de ambiente (.env).
 - cors - Utilizado para habilitar requisições em que o local de origem seja diferente do local do server.
-- twitter-text - Biblioteca de código aberto criada pelo Twitter com funções de validação 
+- twitter-text - Biblioteca de código aberto criada pelo Twitter com funções de validação.
 - react-masonry-css - Biblioteca que provem o moisaco de tweets utilizado na aplicação.
