@@ -1,17 +1,27 @@
 # hashtag-query
+![node version](https://img.shields.io/static/v1?label=node&message=v16.13.1&color=blue)
+
 
 ## Instalação
+A solução pode ser instalada de duas maneiras. Em sistemas UNIX (Linux/MacOS), basta utilizar os arquivos makefile contidos nos diretorios raiz, para o cliente, e no diretório ./server, para o servidor, utilizando os comandos abaixo no terminal:
 
-Para a solução ser utilizada, é necessário iniciar o server, localizado no diretório ./server. Com o terminal/cmd neste diretório, basta executar os comandos abaixo:
+- `make setup`: Para instalar as dependencias utilizadas pelos projetos.
+- `make build`: Caso deseje realizar uma nova build do projeto em questão.
+- `make run`: Para executar a solução.
+
+Para computadores Windows (esse processo também pode ser realizado no Linux/MacOS), basta executar os comandos abaixo, em um cmd/terminal no diretório raiz do projeto para executar o cliente:
 
 `npm install`
 `npm start`
 
-Após o start o servidor estara executando e pronto para receber requisições. 
-Com isso, em outro terminal/cmd, basta executar novamente os mesmos comandos acima no diretório raiz para realizar a instalação do front-end.
-Após o start na raiz do diretório a aplicação estará pronta para ser utilizada através da URL informada no terminal/cmd.
+E para executar o servidor, é necessário executar os seguintes comandos no diretório ./server: 
 
-O comando `npm start` já builda automaticamente os projetos, mas caso deseje executar apenas o fluxo de build, basta utilizar o comando `npm run build` no diretório do projeto (client ou server) desejado.
+`npm install`
+`npm run build`
+`npm start`
+
+Após executar os dois projetos, a aplicação estará pronta para ser utilizada através da URL [Link da aplicação (local)](http://localhost:3000/).
+
 
 ## Ferramentas utilizadas:
 - express - Simplifica a implementação da API REST.

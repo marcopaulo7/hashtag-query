@@ -5,4 +5,5 @@ setup:
 build:
 	@npm run build
 run:
+	@npm run build	
 	@npm start
